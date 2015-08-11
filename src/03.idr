@@ -130,8 +130,16 @@ hasSubseq Nil Nil = True
 hasSubseq Nil (_ :: _) = False
 hasSubseq (x :: xs) s = if startsW (x :: xs) s then True else hasSubseq xs s
 
-main : IO ()
-main = putStrLn $ show$ hasSubseq [1..4] [2]
+--- TREES 
+
+data Tree : Type -> Type where 
+ Leaf : (value: a) -> Tree a 
+ Branch : (left: Tree a) -> (right: Tree a) -> Tree a
+ 
+size : Tree a -> Int
+size (Leaf _) = 1
+size (Branch l r) = size l + size r
+
 ---------- Proofs ----------
 
 Main.foldRightWithNilAndConsIsId_Nil = proof
